@@ -2,47 +2,66 @@
 <html>
 	<head>
 		<title>FlexBox</title>
+		<style type="text/css">
+			/*basic reset*/
+			* {margin: 0; padding: 0;}
+			/*adding a black bg to the body to make things clearer*/
+			body {background: black;}
+			canvas {display: block;}
+		</style>
 
-		<!-- Materialize -->
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-
-		<!-- Mobile stuff -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<meta name="theme-color" content="#1A1D23">
+		<meta name="theme-color" content="#000000">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<!-- Metadata, mainly for Discord -->
-		<meta property="og:type" content="website" />
 		<meta property="og:title" content="FlexBox" />
-		<meta property="og:author" content="Flex" />
-		<meta property="og:description" content="soon&trade;" />
-
-		<!-- JS -->
-		<script>
-			$(".btn-menu").sideNav();
-		</script>
+		<meta property="og:description" content="8&#x0299;&#x026A;&#x1D1B; &#x1D05;&#x0280;&#x1D07;&#x1D00;&#x1D0D;s" />
 	</head>
-	<body style="background: #1A1D23; color: #FFFFFF;">
-		<ul id="slide-out" class="side-nav fixed teal darken-2">
-			<li><a href="#!">First Sidebar Link</a></li>
-			<li><a href="#!">Second Sidebar Link</a></li>
-		</ul>
+	<body>
+		<canvas id="bg" style="z-index: -9999;"></canvas>
 
-		<header class="page-header">
-			<h1 style="vertical-align: middle; text-align: center;">FlexBox</h1>
-		</header>
+		<script>
+			var c = document.getElementById("bg");
+			var ctx = c.getContext("2d");
 
-		<main>
+			c.height = window.innerHeight;
+			c.width = window.innerWidth;
 
-		</main>
+			var font_size = 16;
+			var columns = c.width/font_size;
 
-		<footer>
+			var drops = [];
 
-		</footer>
+			for(var x = 0; x < columns; x++) drops[x] = 1;
 
-		<a href="#" data-activates="slide-out" class="btn-menu btn-floating btn-large waves-effect waves-light" style="position:absolute; top:20px; left:20px;"><i class="material-icons">menu</i></a>
+			function draw()
+			{
+				ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+				ctx.fillRect(0, 0, c.width, c.height);
+
+				ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16); //green text
+				ctx.font = font_size + "px Courier New";
+
+				for(var i = 0; i < drops.length; i++)
+				{
+					ctx.fillRect(i*font_size, drops[i]*font_size, font_size, font_size);
+
+					if(drops[i]*font_size > c.height && Math.random() > 0.975) drops[i] = 0;
+
+					drops[i]++;
+				}
+			}
+
+			setInterval(draw, 33);
+
+			ctx.fillStyle = "#FFF"
+			ctx.font = "16px Courier New";
+			ctx.fillText("Music: disease_-_beautiful_insanity.xm", 4, window.innerHeight-16);
+
+			var audio = new Audio( "assets/beautiful_insanity.ogg" );
+			audio.loop = true;
+			audio.volume = 0.45;
+			audio.play();
+		</script>
 	</body>
 </html>
