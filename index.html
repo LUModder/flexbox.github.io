@@ -17,6 +17,51 @@
 		<meta property="og:description" content="8&#x0299;&#x026A;&#x1D1B; &#x1D05;&#x0280;&#x1D07;&#x1D00;&#x1D0D;s" />
 
 		<script src="https://rawgit.com/a1k0n/jsxm/master/xm.js"></script>
+
+		<script type="text/javascript">
+			function loadXMAndInit(xmdata) {
+				if (!XMPlayer.load(xmdata)) {
+					return;
+				}
+
+				XMView.init();
+
+				var playbutton = document.getElementById("playpause");
+				playbutton.innerHTML='Play';
+				playbutton.onclick = function() {
+					if (XMPlayer.playing) {
+						XMPlayer.pause();
+						playbutton.innerHTML='Play';
+					} else {
+						XMPlayer.play();
+						playbutton.innerHTML='Pause';
+					}
+				};
+				playbutton.disabled = false;
+
+				return XMPlayer.xm;
+			}
+
+			function downloadXM(uri) {
+				var xmReq = new XMLHttpRequest();
+				xmReq.open("GET", uri, true);
+				xmReq.responseType = "arraybuffer";
+				xmReq.onload = function (xmEvent) {
+					var arrayBuffer = xmReq.response;
+					if (arrayBuffer) {
+						loadXMAndInit(arrayBuffer);
+					} else {
+						console.log("unable to load", uri);
+					}
+				};
+				xmReq.send(null);
+			}
+
+			window.onload = function() {
+				XMPlayer.init();
+				downloadXM("assets/disease_-_beautiful_insanity.xm");
+			}
+		</script>
 	</head>
 	<body>
 		<canvas id="bg" style="z-index: -9999;"></canvas>
@@ -75,49 +120,6 @@
 			audio.loop = true;
 			audio.volume = (mute ? 0 : 0.45);
 			audio.play();*/
-
-			function loadXMAndInit(xmdata) {
-				if (!XMPlayer.load(xmdata)) {
-					return;
-				}
-
-				XMView.init();
-
-				var playbutton = document.getElementById("playpause");
-				playbutton.innerHTML='Play';
-				playbutton.onclick = function() {
-					if (XMPlayer.playing) {
-						XMPlayer.pause();
-						playbutton.innerHTML='Play';
-					} else {
-						XMPlayer.play();
-						playbutton.innerHTML='Pause';
-					}
-				};
-				playbutton.disabled = false;
-
-				return XMPlayer.xm;
-			}
-
-			function downloadXM(uri) {
-				var xmReq = new XMLHttpRequest();
-				xmReq.open("GET", uri, true);
-				xmReq.responseType = "arraybuffer";
-				xmReq.onload = function (xmEvent) {
-					var arrayBuffer = xmReq.response;
-					if (arrayBuffer) {
-						loadXMAndInit(arrayBuffer);
-					} else {
-						console.log("unable to load", uri);
-					}
-				};
-				xmReq.send(null);
-			}
-
-			window.onload = function() {
-				XMPlayer.init();
-				downloadXM("assets/disease_-_beautiful_insanity.xm");
-			}
 		</script>
 	</body>
 </html>
