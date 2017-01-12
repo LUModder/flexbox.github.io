@@ -24,18 +24,7 @@
 					return;
 				}
 
-				var playbutton = document.getElementById("playpause");
-				playbutton.innerHTML='Play';
-				playbutton.onclick = function() {
-					if (XMPlayer.playing) {
-						XMPlayer.pause();
-						playbutton.innerHTML='Play';
-					} else {
-						XMPlayer.play();
-						playbutton.innerHTML='Pause';
-					}
-				};
-				playbutton.disabled = false;
+				XMPlayer.play();
 
 				return XMPlayer.xm;
 			}
