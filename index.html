@@ -2,12 +2,7 @@
 <html>
 	<head>
 		<title>FlexBox</title>
-		<style type="text/css">
-			body {background: #000; margin: 0; padding: 0; color:#FFF;}
-			canvas {display: block; margin: 0; padding: 0;}
-		</style>
-
-		<style type="text/css" href="assets/style.css"></style>
+		<link href="/assets/style.css" rel="stylesheet">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<meta name="theme-color" content="#000000">
@@ -55,25 +50,13 @@
 		<canvas id="bg" style="z-index: -9999;"></canvas>
 
 		<script>
-			function getParameterByName(name, url) {
-				if (!url) {
-					url = window.location.href;
-				}
-				name = name.replace(/[\[\]]/g, "\\$&");
-				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-					results = regex.exec(url);
-				if (!results) return null;
-				if (!results[2]) return '';
-				return decodeURIComponent(results[2].replace(/\+/g, " "));
-			}
-
 			var c = document.getElementById("bg");
 			var ctx = c.getContext("2d");
 
 			c.height = window.innerHeight;
 			c.width = window.innerWidth;
 
-			var font_size = 16;
+			var font_size = 8;
 			var columns = c.width/font_size;
 
 			var drops = [];
@@ -88,6 +71,7 @@
 				ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
 				for(var i = 0; i < drops.length; i++)
 				{
+					//ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
 					ctx.fillRect((i*font_size)-font_size, (drops[i]*font_size)-font_size, font_size, font_size);
 
 					if(drops[i]*font_size > c.height && Math.random() > 0.975) drops[i] = 0;
@@ -101,13 +85,8 @@
 			ctx.fillStyle = "#FFF"
 			ctx.font = "16px Courier New";
 			ctx.fillText("Music: disease_-_beautiful_insanity.xm", 4, window.innerHeight-16);
-
-			var mute = getParameterByName('mute');
-
-			/*var audio = new Audio( "assets/beautiful_insanity.ogg" );
-			audio.loop = true;
-			audio.volume = (mute ? 0 : 0.45);
-			audio.play();*/
 		</script>
+
+		<header>FlexBox</header>
 	</body>
 </html>
