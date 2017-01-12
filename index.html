@@ -16,6 +16,7 @@
 		<meta property="og:title" content="FlexBox" />
 		<meta property="og:description" content="8&#x0299;&#x026A;&#x1D1B; &#x1D05;&#x0280;&#x1D07;&#x1D00;&#x1D0D;s" />
 
+		<script src="https://rawgit.com/a1k0n/jsxm/master/xmeffects.js"></script>
 		<script src="https://rawgit.com/a1k0n/jsxm/master/xm.js"></script>
 
 		<script type="text/javascript">
@@ -46,7 +47,7 @@
 
 			window.onload = function() {
 				XMPlayer.init();
-				downloadXM("assets/disease_-_beautiful_insanity.xm");
+				downloadXM("/assets/disease_-_beautiful_insanity.xm");
 			}
 		</script>
 	</head>
@@ -87,7 +88,7 @@
 				ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
 				for(var i = 0; i < drops.length; i++)
 				{
-					ctx.fillRect(i*font_size, drops[i]*font_size, font_size, font_size);
+					ctx.fillRect((i*font_size)-font_size, (drops[i]*font_size)-font_size, font_size, font_size);
 
 					if(drops[i]*font_size > c.height && Math.random() > 0.975) drops[i] = 0;
 
