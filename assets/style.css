@@ -1,0 +1,35 @@
+@font-face {
+	font-family: '8x16';
+	src: url('/assets/font/dos437-webfont.eot');
+	src: local('dos437'),url('/assets/font/dos437-webfont.woff') format('woff'),url('/assets/font/dos437-webfont.ttf') format('truetype'),url('/assets/font/dos437-webfont.svg#webfontpVS4iJcr') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+header {
+	background: rgba(0,0,0,0.75);
+	position: absolute;
+	top:0;
+	left:0;
+	right:0;
+	width:99.5%;
+	font-size: 8px;
+	padding:4px 4px;
+}
+
+body {
+	background: #000;
+	margin: 0;
+	padding: 0;
+	color:#FFF;
+	font-family: "8x16", monospace;
+}
+
+canvas {
+	display: block;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top:0;
+	left:0;
+}
